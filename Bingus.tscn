@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6xvw22y2tg5p"]
+
+[ext_resource type="Texture2D" path="res://Bingus.png" id="1_a630f"]
+[ext_resource type="Texture2D" path="res://133-1338974_1920s-clip-art.png" id="2_i58g6"]
+[ext_resource type="Script" path="res://gun.gd" id="2_vepxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr7l1"]
+size = Vector2(108.547, 135.685)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Bingus" type="CharacterBody2D" parent="."]
+rotation = -0.0274689
+scale = Vector2(-1, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bingus"]
+z_index = 1
+position = Vector2(-1214.48, 108.397)
+scale = Vector2(0.36, 0.307)
+texture = ExtResource("1_a630f")
+
+[node name="Rifle" type="CharacterBody2D" parent="Bingus"]
+z_index = 1
+position = Vector2(-1133.93, 127.192)
+scale = Vector2(-1, 1)
+script = ExtResource("2_vepxb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bingus/Rifle"]
+position = Vector2(3.66895, 12.1053)
+scale = Vector2(0.073, 0.079)
+texture = ExtResource("2_i58g6")
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="Bingus/Rifle"]
+position = Vector2(-69.8045, -7.92032)
+scale = Vector2(0.073, 0.079)
+
+[node name="Area2D" type="Area2D" parent="Bingus" groups=["bingus_group"]]
+rotation = 3.11412
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bingus/Area2D"]
+position = Vector2(1193.14, 73.7408)
+rotation = 3.11412
+scale = Vector2(0.959019, -1.01494)
+shape = SubResource("RectangleShape2D_hr7l1")

@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://cdr4rtf3nh3xy"]
+
+[ext_resource type="Script" path="res://InfiniteScroller.gd" id="1_j2w0t"]
+[ext_resource type="Texture2D" path="res://background_merge.png" id="2_et08u"]
+[ext_resource type="Script" path="res://Floppa.gd" id="3_cj56v"]
+[ext_resource type="PackedScene" uid="uid://bhh0wlgfcwtsk" path="res://barrier.tscn" id="3_hu5db"]
+[ext_resource type="Texture2D" path="res://[removal.ai]_0b7c390a-643f-4379-96dc-2b675afdabd2-floppa_gam-e.png" id="3_veb84"]
+[ext_resource type="Texture2D" path="res://[removal.ai]_564af56b-ca4c-48b6-9cba-547d15ef2546-image.png" id="4_u2guy"]
+[ext_resource type="Script" path="res://Rifle.gd" id="5_boffw"]
+[ext_resource type="Script" path="res://Lives.gd" id="8_2oy1c"]
+[ext_resource type="Script" path="res://Kills.gd" id="9_1pqx7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bqptw"]
+height = 23.5823
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4d35a"]
+size = Vector2(11.0851, 23.2849)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1rnv7"]
+font_size = 26
+
+[node name="InfiniteScroller" type="Node2D"]
+position = Vector2(6199, 7285)
+script = ExtResource("1_j2w0t")
+
+[node name="Background1" type="Sprite2D" parent="."]
+position = Vector2(-2682.99, 0)
+scale = Vector2(2.36, 1.44)
+texture = ExtResource("2_et08u")
+
+[node name="Barrier" parent="Background1" instance=ExtResource("3_hu5db")]
+position = Vector2(1865.25, -375)
+scale = Vector2(0.423729, 0.694444)
+
+[node name="Floppa" type="CharacterBody2D" parent="."]
+position = Vector2(-2972, 0)
+rotation = -0.0274689
+script = ExtResource("3_cj56v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floppa"]
+scale = Vector2(11.6284, 4.564)
+shape = SubResource("CapsuleShape2D_bqptw")
+debug_color = Color(0.586634, 0.343154, 1, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Floppa"]
+z_index = 2
+scale = Vector2(0.63, 0.537)
+texture = ExtResource("3_veb84")
+
+[node name="Rifle" type="CharacterBody2D" parent="Floppa"]
+script = ExtResource("5_boffw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floppa/Rifle"]
+z_index = 1
+position = Vector2(58.8513, 42.6325)
+rotation = -0.074242
+scale = Vector2(0.585, 0.671)
+texture = ExtResource("4_u2guy")
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="Floppa/Rifle"]
+modulate = Color(0.723859, 0.619302, 0, 1)
+position = Vector2(229.886, 7.31667)
+gizmo_extents = 33.8
+
+[node name="Area2D" type="Area2D" parent="Floppa" groups=["floppa_group"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floppa/Area2D"]
+position = Vector2(-22.6497, -35.374)
+rotation = -3.14159
+scale = Vector2(16.2787, 2.51424)
+shape = SubResource("RectangleShape2D_4d35a")
+debug_color = Color(0.505496, 0.361167, 0, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-2515, 0)
+
+[node name="Lives" type="Label" parent="Camera2D"]
+z_index = 7
+offset_left = 303.0
+offset_top = -296.0
+offset_right = 645.0
+offset_bottom = -163.0
+text = "sfhsohfishiofhsiohfiohio"
+label_settings = SubResource("LabelSettings_1rnv7")
+script = ExtResource("8_2oy1c")
+metadata/_edit_use_anchors_ = true
+
+[node name="Kills" type="Label" parent="Camera2D"]
+z_index = 7
+offset_left = 303.0
+offset_top = -235.0
+offset_right = 645.0
+offset_bottom = -102.0
+text = "sfhsohfishiofhsiohfiohio"
+label_settings = SubResource("LabelSettings_1rnv7")
+script = ExtResource("9_1pqx7")
+metadata/_edit_use_anchors_ = true

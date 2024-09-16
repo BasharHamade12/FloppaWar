@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpyrm28241v8h"]
+
+[ext_resource type="Script" path="res://InfiniteScroller.gd" id="1_j2w0t"]
+[ext_resource type="Texture2D" uid="uid://c13savkomp3ce" path="res://background_merge.png" id="2_et08u"]
+[ext_resource type="Script" path="res://Floppa.gd" id="3_cj56v"]
+[ext_resource type="PackedScene" uid="uid://c48quqyaonx4v" path="res://barrier.tscn" id="3_hu5db"]
+[ext_resource type="Texture2D" uid="uid://bbabhmnblqvs1" path="res://[removal.ai]_0b7c390a-643f-4379-96dc-2b675afdabd2-floppa_gam-e.png" id="3_veb84"]
+[ext_resource type="Texture2D" uid="uid://bw0qwd6xuhmus" path="res://[removal.ai]_564af56b-ca4c-48b6-9cba-547d15ef2546-image.png" id="4_u2guy"]
+[ext_resource type="Script" path="res://Rifle.gd" id="5_boffw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bqptw"]
+
+[node name="InfiniteScroller" type="Node2D"]
+position = Vector2(6199, 7285)
+script = ExtResource("1_j2w0t")
+
+[node name="Background1" type="Sprite2D" parent="."]
+position = Vector2(-2682.99, 0)
+scale = Vector2(2.36, 1.44)
+texture = ExtResource("2_et08u")
+
+[node name="Barrier" parent="Background1" instance=ExtResource("3_hu5db")]
+position = Vector2(1865.25, -221.528)
+scale = Vector2(0.423729, 0.694444)
+
+[node name="Floppa" type="CharacterBody2D" parent="."]
+position = Vector2(-2972, 0)
+rotation = -0.0274689
+script = ExtResource("3_cj56v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floppa"]
+z_index = 2
+scale = Vector2(0.63, 0.537)
+texture = ExtResource("3_veb84")
+
+[node name="Rifle" type="CharacterBody2D" parent="Floppa"]
+script = ExtResource("5_boffw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floppa/Rifle"]
+z_index = 1
+position = Vector2(58.8513, 42.6325)
+rotation = -0.074242
+scale = Vector2(0.585, 0.671)
+texture = ExtResource("4_u2guy")
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="Floppa/Rifle"]
+modulate = Color(0.723859, 0.619302, 0, 1)
+position = Vector2(229.886, 7.31667)
+gizmo_extents = 33.8
+
+[node name="Area2D" type="Area2D" parent="Floppa" groups=["floppa_group"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floppa/Area2D"]
+scale = Vector2(11.6284, 4.564)
+shape = SubResource("CapsuleShape2D_bqptw")
+debug_color = Color(0.586634, 0.343154, 1, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-2515, 0)
